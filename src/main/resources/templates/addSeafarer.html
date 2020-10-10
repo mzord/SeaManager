@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add crew member</title>
+    <style>
+    #formDiv {
+        display: grid;
+        grid-template-columns: 3;
+    }
+    .formDiv {
+        padding: 10px;
+    }
+    .1column {
+        grid-column: 3;
+    }
+
+<!--    #name {-->
+<!--        grid-column: 3;-->
+<!--    }-->
+
+    </style>
+</head>
+<body>
+
+    <div align="center">
+        <div method="post">
+            <div id="formDiv">
+                <div class="formDiv 1column" id="name">
+                    <label>Name: </label>
+                    <input type="text" placeholder="name" />
+                </div>
+                <div class="formDiv 1column" id="register">
+                    <label>CIR number:</label>
+                    <input type="text" placeholder="register number" />
+                </div>
+                <div class="formDiv 1column">
+                    <label>Seafarer Register Number</label>
+                    <input type="text" placeholder="register">
+                </div>
+                <div class="formDiv 2column">
+                    <label>Date of Birth</label>
+                    <input type="date" name="seafarerDob">
+                </div>
+                <div class="formDiv 2column">
+                    <label>On board?</label>
+                    <input type="checkbox" name="isOnboard" placeholder="false">
+                </div>
+                <div class="formDiv 2column">
+                    <label>Embark Date</label>
+                    <input type="date" name="embarkDate">
+                </div>
+                <div class="formDiv 2column">
+                    <label>Disembark Date</label>
+                    <input type="date" name="embarkDate">
+                </div>
+                <div class="formDiv 3column">
+                    <label>Rank</label>
+                    <input type="text" name="seafarerRank">
+                </div>
+                <div class="formDiv 3column">
+                    <label>Function</label>
+                    <input type="text" name="seafarerFunction"/>
+                </div>
+    <!--            {-->
+    <!--            "seafarer_dob": "1992-12-02",-->
+    <!--            "is_onboard": true,-->
+    <!--            "embark_date": "2020-09-28",-->
+    <!--            "disembark_date": null,-->
+    <!--            "seafarer_rank": "SEGUNDO_ON",-->
+    <!--            "seafarer_function": "OQN"-->
+    <!--            },-->
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
