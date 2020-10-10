@@ -11,20 +11,21 @@ import java.util.HashSet;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/certificates")
 public class CertificateController {
 
     @Autowired
     public ICertificateService certificateService;
 
     // Request all certs from a user
-    @GetMapping("/api/certificates/{id}")
-    public HashSet<Certificate> certificates(@PathVariable("id") Long id) {
+    @GetMapping("/{id}")
+    public HashSet<Certificate> showCertificates(@PathVariable("id") Long id) {
         HashSet<Certificate> certificates = certificateService.findBySeafarer(id);
         return certificates;
     }
 
     // Create certificates from a list (JPA return it in a Iterable List)
-    @PostMapping("/api/certificates")
+    @PostMapping("/add")
     public Iterable<Certificate> addCertificate(@RequestBody HashSet<Certificate> newCertificates) {
         return certificateService.saveAll(newCertificates);
     }

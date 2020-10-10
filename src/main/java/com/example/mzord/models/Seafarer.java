@@ -1,12 +1,15 @@
 package com.example.mzord.models;
 
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import org.springframework.hateoas.RepresentationModel;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "seafarer")
-public class Seafarer {
+public class Seafarer extends RepresentationModel<Seafarer> {
 
 
     @Id
