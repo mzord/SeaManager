@@ -2,9 +2,7 @@ package com.example.mzord.controllers;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 import com.example.mzord.models.Seafarer;
-import com.example.mzord.repositories.SeafarerRepository;
 import com.example.mzord.services.ISeafarerService;
-import com.example.mzord.services.SeafarerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +20,12 @@ public class SeafarerController {
     @GetMapping("/all")
     public List<Seafarer> showAll() {
         List<Seafarer> seafarers = seafarerService.findAll();
-        return seafarerService.findAll();
+        for(Seafarer seafarer : seafarers) {
+            seafarer.add(linkTo(methodOn(CertificateController.class)
+                    .showCertificates(seafarer.getId()))
+                    .withRel("Certificates:"));
+        }
+        return seafarers;
     }
 
     // Show specific seafarer using PathVariable 'id'

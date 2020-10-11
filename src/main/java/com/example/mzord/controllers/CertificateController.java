@@ -17,7 +17,7 @@ public class CertificateController {
     @Autowired
     public ICertificateService certificateService;
 
-    // Request all certs from a user
+    // Request all certs from an user
     @GetMapping("/{id}")
     public HashSet<Certificate> showCertificates(@PathVariable("id") Long id) {
         HashSet<Certificate> certificates = certificateService.findBySeafarer(id);
@@ -29,5 +29,4 @@ public class CertificateController {
     public Iterable<Certificate> addCertificate(@RequestBody HashSet<Certificate> newCertificates) {
         return certificateService.saveAll(newCertificates);
     }
-
 }
