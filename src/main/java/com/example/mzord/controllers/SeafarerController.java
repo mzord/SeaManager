@@ -6,8 +6,11 @@ import com.example.mzord.services.ISeafarerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/seafarers")
@@ -34,7 +37,7 @@ public class SeafarerController {
         Optional<Seafarer> seafarer = seafarerService.findById(id);
         seafarer.get().add(linkTo(methodOn(CertificateController.class)
                 .showCertificates(seafarer.get().getId()))
-                .withRel("This seafarer certificates"));
+                .withRel("Certificates:"));
         return seafarer;
     }
 
@@ -42,6 +45,12 @@ public class SeafarerController {
     @PostMapping("/add")
     public Seafarer addSeafarer(@RequestBody Seafarer newSeafarer) {
         return seafarerService.save(newSeafarer);
+    }
+
+    // Show crew onboard
+    @GetMapping("/crew")
+    public List<Seafarer> crew() {
+        return seafarerService.showCrew();
     }
 
 }

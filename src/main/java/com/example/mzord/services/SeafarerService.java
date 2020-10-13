@@ -5,8 +5,11 @@ import com.example.mzord.repositories.SeafarerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class SeafarerService implements ISeafarerService {
@@ -14,19 +17,26 @@ public class SeafarerService implements ISeafarerService {
     @Autowired
     private SeafarerRepository repository;
 
+    @Override
     public List<Seafarer> findAll() {
-        var seafarers = (List<Seafarer>) repository.findAll();
-
-        return seafarers;
+        return repository.findAll();
     }
 
+    @Override
     public Optional<Seafarer> findById(Long id) {
-        Optional<Seafarer> seafarer = repository.findById(id);
-        return seafarer;
+        return repository.findById(id);
     }
 
     @Override
     public Seafarer save(Seafarer seafarer) {
         return repository.save(seafarer);
+    }
+
+    @Override
+    public List<Seafarer> showCrew() {
+        List<Seafarer> seafarers = repository.findAll();
+        return seafarers.stream()
+                .filter(Seafarer::getIsOnboard)
+                .collect(Collectors.toList());
     }
 }

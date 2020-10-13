@@ -1,7 +1,6 @@
 package com.example.mzord.models;
 
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import org.springframework.hateoas.RepresentationModel;
 
 import javax.persistence.*;
@@ -16,98 +15,98 @@ public class Seafarer extends RepresentationModel<Seafarer> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String seafarer_name;
-    private String seafarer_register;
-    private LocalDate seafarer_dob;
-    private Boolean is_onboard;
-    private LocalDate embark_date;
-    private LocalDate disembark_date;
+    private String seafarerName;
+    private String seafarerRegister;
+    private LocalDate seafarerDob;
+    private Boolean isOnboard;
+    private LocalDate embarkDate;
+    private LocalDate disembarkDate;
 
     @Enumerated(EnumType.STRING)
-    private Rank seafarer_rank;
+    private Rank seafarerRank;
 
     @Enumerated(EnumType.STRING)
-    private Function seafarer_function;
+    private Function seafarerFunction;
 
     public Seafarer() {}
 
-    public Seafarer(Long id, String seafarer_name, String seafarer_register, LocalDate seafarer_dob, Boolean is_onboard, LocalDate embark_date, LocalDate disembark_date, Rank seafarer_rank, Function seafarer_function) {
+    public Seafarer(Long id, String seafarerName, String seafarerRegister, LocalDate seafarerDob, Boolean isOnboard, LocalDate embarkDate, LocalDate disembarkDate, Rank seafarerRank, Function seafarerFunction) {
         this.id = id;
-        this.seafarer_name = seafarer_name;
-        this.seafarer_register = seafarer_register;
-        this.seafarer_dob = seafarer_dob;
-        this.is_onboard = is_onboard;
-        this.embark_date = embark_date;
-        this.disembark_date = disembark_date;
-        this.seafarer_rank = seafarer_rank;
-        this.seafarer_function = seafarer_function;
+        this.seafarerName = seafarerName;
+        this.seafarerRegister = seafarerRegister;
+        this.seafarerDob = seafarerDob;
+        this.isOnboard = isOnboard;
+        this.embarkDate = embarkDate;
+        this.disembarkDate = disembarkDate;
+        this.seafarerRank = seafarerRank;
+        this.seafarerFunction = seafarerFunction;
     }
 
     public Long getId() {
         return id;
     }
 
-    public String getSeafarer_name() {
-        return seafarer_name;
+    public String getSeafarerName() {
+        return seafarerName;
     }
 
-    public void setSeafarer_name(String seafarer_name) {
-        this.seafarer_name = seafarer_name;
+    public void setSeafarerName(String seafarerName) {
+        this.seafarerName = seafarerName;
     }
 
-    public String getSeafarer_register() {
-        return seafarer_register;
+    public String getSeafarerRegister() {
+        return seafarerRegister;
     }
 
-    public void setSeafarer_register(String seafarer_register) {
-        this.seafarer_register = seafarer_register;
+    public void setSeafarerRegister(String seafarerRegister) {
+        this.seafarerRegister = seafarerRegister;
     }
 
-    public LocalDate getSeafarer_dob() {
-        return seafarer_dob;
+    public LocalDate getSeafarerDob() {
+        return seafarerDob;
     }
 
-    public void setSeafarer_dob(LocalDate seafarer_dob) {
-        this.seafarer_dob = seafarer_dob;
+    public void setSeafarerDob(LocalDate seafarerDob) {
+        this.seafarerDob = seafarerDob;
     }
 
-    public Boolean getIs_onboard() {
-        return is_onboard;
+    public Boolean getIsOnboard() {
+        return isOnboard;
     }
 
-    public void setIs_onboard(Boolean is_onboard) {
-        this.is_onboard = is_onboard;
+    public void setIsOnboard(Boolean is_onboard) {
+        this.isOnboard = is_onboard;
     }
 
-    public LocalDate getEmbark_date() {
-        return embark_date;
+    public LocalDate getEmbarkDate() {
+        return embarkDate;
     }
 
-    public void setEmbark_date(LocalDate embark_date) {
-        this.embark_date = embark_date;
+    public void setEmbarkDate(LocalDate embark_date) {
+        this.embarkDate = embark_date;
     }
 
-    public LocalDate getDisembark_date() {
-        return disembark_date;
+    public LocalDate getDisembarkDate() {
+        return disembarkDate;
     }
 
-    public void setDisembark_date(LocalDate disembark_date) {
-        this.disembark_date = disembark_date;
+    public void setDisembarkDate(LocalDate disembark_date) {
+        this.disembarkDate = disembark_date;
     }
 
-    public Rank getSeafarer_rank() {
-        return seafarer_rank;
+    public Rank getSeafarerRank() {
+        return seafarerRank;
     }
 
-    public void setSeafarer_rank(Rank seafarer_rank) {
-        this.seafarer_rank = seafarer_rank;
+    public void setSeafarerRank(Rank seafarer_rank) {
+        this.seafarerRank = seafarer_rank;
     }
 
-    public Function getSeafarer_function() {
-        return seafarer_function;
+    public Function getSeafarerFunction() {
+        return seafarerFunction;
     }
 
-    public void setSeafarer_function(Function seafarer_function) {
-        this.seafarer_function = seafarer_function;
+    public void setSeafarerFunction(Function seafarer_function) {
+        this.seafarerFunction = seafarer_function;
     }
 }
