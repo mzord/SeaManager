@@ -14,4 +14,5 @@ public interface ISeafarerService {
     public Optional<Seafarer> findById(Long id);
     public Seafarer save(Seafarer seafarer);
     public List<Seafarer> showCrew();
+    public List<Seafarer> sortByFunction();
 }

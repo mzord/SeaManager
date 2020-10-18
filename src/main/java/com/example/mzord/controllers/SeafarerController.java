@@ -2,10 +2,14 @@ package com.example.mzord.controllers;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 import com.example.mzord.models.Seafarer;
+import com.example.mzord.services.DocParser;
 import com.example.mzord.services.ISeafarerService;
+import org.apache.poi.openxml4j.exceptions.OpenXML4JException;
+import org.apache.xmlbeans.XmlException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -50,6 +54,13 @@ public class SeafarerController {
     // Show crew onboard
     @GetMapping("/crew")
     public List<Seafarer> crew() {
+        return seafarerService.showCrew();
+    }
+
+    @GetMapping("/crewlist")
+    public List<Seafarer> generateCrewList() throws OpenXML4JException, XmlException, IOException {
+        DocParser docParser = new DocParser(seafarerService.sortByFunction());
+        docParser.write();
         return seafarerService.showCrew();
     }
 

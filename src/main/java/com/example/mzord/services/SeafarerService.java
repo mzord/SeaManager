@@ -39,4 +39,9 @@ public class SeafarerService implements ISeafarerService {
                 .filter(Seafarer::getIsOnboard)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<Seafarer> sortByFunction() {
+        return repository.findByOrderBySeafarerFunctionAsc();
+    }
 }

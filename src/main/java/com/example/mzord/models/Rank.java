@@ -13,5 +13,7 @@ public enum Rank {
     SEGUNDO_ON,
     PRIMEIRO_ON,
     CCB,
-    CLC
+    CLC,
+    CZA,
+    TAA
 }

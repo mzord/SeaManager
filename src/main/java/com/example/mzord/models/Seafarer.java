@@ -21,6 +21,7 @@ public class Seafarer extends RepresentationModel<Seafarer> {
     private Boolean isOnboard;
     private LocalDate embarkDate;
     private LocalDate disembarkDate;
+    private String seafarerNationality;
 
     @Enumerated(EnumType.STRING)
     private Rank seafarerRank;
@@ -30,7 +31,7 @@ public class Seafarer extends RepresentationModel<Seafarer> {
 
     public Seafarer() {}
 
-    public Seafarer(Long id, String seafarerName, String seafarerRegister, LocalDate seafarerDob, Boolean isOnboard, LocalDate embarkDate, LocalDate disembarkDate, Rank seafarerRank, Function seafarerFunction) {
+    public Seafarer(Long id, String seafarerName, String seafarerRegister, LocalDate seafarerDob, Boolean isOnboard, LocalDate embarkDate, LocalDate disembarkDate, Rank seafarerRank, Function seafarerFunction, String seafarerNationality) {
         this.id = id;
         this.seafarerName = seafarerName;
         this.seafarerRegister = seafarerRegister;
@@ -40,6 +41,7 @@ public class Seafarer extends RepresentationModel<Seafarer> {
         this.disembarkDate = disembarkDate;
         this.seafarerRank = seafarerRank;
         this.seafarerFunction = seafarerFunction;
+        this.seafarerNationality = seafarerNationality;
     }
 
     public Long getId() {
@@ -92,6 +94,14 @@ public class Seafarer extends RepresentationModel<Seafarer> {
 
     public void setDisembarkDate(LocalDate disembark_date) {
         this.disembarkDate = disembark_date;
+    }
+
+    public String getNationality() {
+        return seafarerNationality;
+    }
+
+    public void setNationality(String nationality) {
+        this.seafarerNationality = nationality;
     }
 
     public Rank getSeafarerRank() {

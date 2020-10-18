@@ -1,14 +1,14 @@
 package com.example.mzord.services;
 
+import com.example.mzord.models.Seafarer;
 import org.apache.poi.openxml4j.exceptions.OpenXML4JException;
 import org.apache.poi.xwpf.usermodel.*;
 import org.apache.xmlbeans.XmlException;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class DocParser {
 
@@ -20,49 +20,89 @@ public class DocParser {
     List<XWPFTable> tables = document.getTables();
     XWPFTable table = document.getTableArray(1);
 
-    private XWPFTableRow cmt = table.getRow(1);
-    private XWPFTableRow imt = table.getRow(2);
-    private XWPFTableRow oqn = table.getRow(3);
-    private XWPFTableRow mcb = table.getRow(4);
-    private XWPFTableRow mnc1 = table.getRow(5);
-    private XWPFTableRow mnc2 = table.getRow(6);
-    private XWPFTableRow mnc3 = table.getRow(7);
-    private XWPFTableRow mnc4 = table.getRow(8);
-    private XWPFTableRow cfm = table.getRow(9);
-    private XWPFTableRow sfm = table.getRow(10);
-    private XWPFTableRow cdm = table.getRow(11);
-    private XWPFTableRow mnm1 = table.getRow(12);
-    private XWPFTableRow mnm2 = table.getRow(13);
-    private XWPFTableRow cza = table.getRow(14);
-    private XWPFTableRow taa = table.getRow(15);
+    private List<Seafarer> crew = new ArrayList<>();
 
 
-    public DocParser() throws IOException, OpenXML4JException, XmlException {
+    public DocParser(List<Seafarer> seafarerList) throws IOException, OpenXML4JException, XmlException {
+        this.crew = seafarerList;
+    }
 
-        docSetText(
-                cmt,
-                "01",
-                "Le Captain",
-                "CMT",
-                "BRASILEIRA",
-                "02/12/1992",
-                "381Pcarteado",
-                "01/01/1960"
-        );
 
+    public void write() throws IOException {
         FileOutputStream out = new FileOutputStream("/Users/mzord/Desktop/teste.docx");
+        populateCrewList();
         document.write(out);
     }
 
-    public void docSetText(
+    public void populateCrewList() {
+        // Ignore o count, eu vou mudar isso.
+        int count = 1;
+        for (Seafarer member : crew) {
+            // Crio um Row para cada membro em crew(List<CrewMember>)
+            XWPFTableRow tableRow = table.createRow();
+            List<XWPFTableCell> cells = tableRow.getTableCells();
+
+            // Pego o parágrafo da célular para mudar o texto. Nesse caso, cada célular só tem um parágrafo,
+            // por isso usei o get(0) na lista de paragrafos.
+            XWPFParagraph paragraph = cells.get(0).getParagraphs().get(0);
+            paragraph.setAlignment(ParagraphAlignment.CENTER);
+            XWPFRun run = paragraph.createRun();
+            run.setBold(true);
+            run.setFontSize(8);
+            run.setText(String.valueOf(count));
+
+            paragraph = cells.get(1).getParagraphs().get(0);
+            paragraph.setAlignment(ParagraphAlignment.CENTER);
+            paragraph.setStyle("Heading1");
+            run = paragraph.createRun();
+            run.setBold(true);
+            run.setFontSize(8);
+            run.setText(member.getSeafarerName());
+
+            paragraph = cells.get(2).getParagraphs().get(0);
+            paragraph.setAlignment(ParagraphAlignment.CENTER);
+            paragraph.setStyle("Heading1");
+            run = paragraph.createRun();
+            run.setBold(true);
+            run.setFontSize(8);
+            run.setText(member.getSeafarerFunction().toString());
+
+            paragraph = cells.get(3).getParagraphs().get(0);
+            paragraph.setAlignment(ParagraphAlignment.CENTER);
+            run = paragraph.createRun();
+            run.setBold(true);
+            run.setFontSize(8);
+            run.setText(member.getNationality());
+
+            paragraph = cells.get(4).getParagraphs().get(0);
+            paragraph.setAlignment(ParagraphAlignment.CENTER);
+            run = paragraph.createRun();
+            run.setBold(true);
+            run.setFontSize(8);
+            run.setText(member.getSeafarerDob().toString());
+
+            paragraph = cells.get(5).getParagraphs().get(0);
+            paragraph.setAlignment(ParagraphAlignment.CENTER);
+            run = paragraph.createRun();
+            run.setBold(true);
+            run.setFontSize(8);
+            run.setText(member.getSeafarerRegister());
+
+            paragraph = cells.get(6).getParagraphs().get(0);
+            paragraph.setAlignment(ParagraphAlignment.CENTER);
+            run = paragraph.createRun();
+            run.setBold(true);
+            run.setFontSize(8);
+            run.setText(member.getEmbarkDate().toString());
+
+            count++;
+
+        }
+    }
+
+    public void docSetRowText(
             XWPFTableRow row,
-            String number,
-            String name,
-            String function,
-            String nationality,
-            String dob,
-            String register,
-            String embarkDate) {
+            Seafarer seafarer) {
         List<XWPFTableCell> cells = row.getTableCells();
         for (XWPFTableCell cell : cells) {
 
@@ -73,43 +113,43 @@ public class DocParser {
 
                 if (cell.equals(row.getTableCells().get(0))) {
                     for(XWPFRun run : paragraph.getRuns()) {
-                        run.setText(number, 0);
+                        run.setText("0", 0);
                     }
                 }
 
                 if (cell.equals(row.getTableCells().get(1))) {
                     for(XWPFRun run : paragraph.getRuns()) {
-                        run.setText(name, 0);
+                        run.setText(seafarer.getSeafarerName(), 0);
                     }
                 }
 
                 if (cell.equals(row.getTableCells().get(2))) {
                     for(XWPFRun run : paragraph.getRuns()) {
-                        run.setText(function, 0);
+                        run.setText(seafarer.getSeafarerFunction().toString(), 0);
                     }
                 }
 
                 if (cell.equals(row.getTableCells().get(3))) {
                     for(XWPFRun run : paragraph.getRuns()) {
-                        run.setText(nationality, 0);
+                        run.setText(seafarer.getNationality(), 0);
                     }
                 }
 
                 if (cell.equals(row.getTableCells().get(4))) {
                     for(XWPFRun run : paragraph.getRuns()) {
-                        run.setText(dob, 0);
+                        run.setText(seafarer.getSeafarerDob().toString(), 0);
                     }
                 }
 
                 if (cell.equals(row.getTableCells().get(5))) {
                     for(XWPFRun run : paragraph.getRuns()) {
-                        run.setText(register, 0);
+                        run.setText(seafarer.getSeafarerRegister(), 0);
                     }
                 }
 
                 if (cell.equals(row.getTableCells().get(6))) {
                     for(XWPFRun run : paragraph.getRuns()) {
-                        run.setText(embarkDate, 0);
+                        run.setText(seafarer.getEmbarkDate().toString(), 0);
                     }
                 }
             }

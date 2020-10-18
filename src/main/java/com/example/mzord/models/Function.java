@@ -78,6 +78,18 @@ public enum Function {
         public String toString() {
             return "Subchefe de Máquinas";
         }
+    },
+    CZA {
+        @Override
+        public String toString() {
+            return "Cozinheiro";
+        }
+    },
+    TAA {
+        @Override
+        public String toString() {
+            return "Taifeiro";
+        }
     };
 
     public abstract String toString();
