@@ -59,7 +59,7 @@ public class SeafarerController {
 
     @GetMapping("/crewlist")
     public List<Seafarer> generateCrewList() throws OpenXML4JException, XmlException, IOException {
-        DocParser docParser = new DocParser(seafarerService.sortByFunction());
+        DocParser docParser = new DocParser(seafarerService.sortByFunction(), "18/10/2020");
         docParser.write();
         return seafarerService.showCrew();
     }

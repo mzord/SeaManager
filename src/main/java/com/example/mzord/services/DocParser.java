@@ -20,11 +20,14 @@ public class DocParser {
     List<XWPFTable> tables = document.getTables();
     XWPFTable table = document.getTableArray(1);
 
+    XWPFTable infoTable = document.getTableArray(0);
+
     private List<Seafarer> crew = new ArrayList<>();
 
 
-    public DocParser(List<Seafarer> seafarerList) throws IOException, OpenXML4JException, XmlException {
+    public DocParser(List<Seafarer> seafarerList, String signDate) throws IOException, OpenXML4JException, XmlException {
         this.crew = seafarerList;
+        changeSignDate();
     }
 
 
@@ -32,6 +35,36 @@ public class DocParser {
         FileOutputStream out = new FileOutputStream("/Users/mzord/Desktop/teste.docx");
         populateCrewList();
         document.write(out);
+    }
+
+    public void changeSignDate() {
+        List<XWPFParagraph> paragraphs = document.getParagraphs();
+        XWPFParagraph paragraph = paragraphs.get(16);
+        System.out.println(paragraph.getRuns());
+    }
+
+    public void populateCrewListInfo(
+            String portOfArrival,
+            String departureTime,
+            String lastPortOfCall) {
+
+        XWPFTableRow portOfArrivalRow = infoTable.getRow(1);
+        XWPFTableCell portOfArrivalCell = portOfArrivalRow.getTableCells().get(1);
+        List<XWPFParagraph> portOfArrivalCellParagraphs = portOfArrivalCell.getParagraphs();
+        List<XWPFRun> portOfArrivalRun = portOfArrivalCellParagraphs.get(1).getRuns();
+        portOfArrivalRun.get(0).setText(portOfArrival, 0);
+
+        XWPFTableRow departureTimeRow = infoTable.getRow(1);
+        XWPFTableCell departureTimeCell = departureTimeRow.getTableCells().get(2);
+        List<XWPFParagraph> departureTimeParagraphs = departureTimeCell.getParagraphs();
+        List<XWPFRun> departureTimeRuns = departureTimeParagraphs.get(1).getRuns();
+        departureTimeRuns.get(0).setText(departureTime, 0);
+
+        XWPFTableRow lastPortOfCallRow = infoTable.getRow(2);
+        XWPFTableCell lastPortOfCallCell = lastPortOfCallRow.getTableCells().get(1);
+        List<XWPFParagraph> lastPortOfCallParagraphs = lastPortOfCallCell.getParagraphs();
+        List<XWPFRun> lastPortOfCallRuns = lastPortOfCallParagraphs.get(2).getRuns();
+        lastPortOfCallRuns.get(0).setText(lastPortOfCall, 0);
     }
 
     public void populateCrewList() {
