@@ -10,11 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/seafarers")
@@ -51,6 +49,22 @@ public class SeafarerController {
         return seafarerService.save(newSeafarer);
     }
 
+    @PutMapping("/update")
+    public List<Seafarer> updateSeafarers(@RequestBody List<Seafarer> seafarerList) {
+        List<Seafarer> updatedSeafarers = new ArrayList<>();
+        seafarerList.forEach(
+                seafarer -> {
+                    seafarerService.updateSeafarer(seafarer);
+                }
+        );
+        return seafarerList;
+    }
+
+    @PutMapping("/update/{id}")
+    public void updateSeafarerById(@PathVariable Long id, @RequestBody Map<String, String> requestJson) {
+        seafarerService.update(id, requestJson);
+    }
+
     // Show crew onboard
     @GetMapping("/crew")
     public List<Seafarer> crew() {
@@ -59,7 +73,7 @@ public class SeafarerController {
 
     @GetMapping("/crewlist")
     public List<Seafarer> generateCrewList() throws OpenXML4JException, XmlException, IOException {
-        DocParser docParser = new DocParser(seafarerService.sortByFunction(), "18/10/2020");
+        DocParser docParser = new DocParser(seafarerService.sortByFunction());
         docParser.write();
         return seafarerService.showCrew();
     }

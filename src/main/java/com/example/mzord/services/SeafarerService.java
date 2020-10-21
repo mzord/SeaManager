@@ -1,14 +1,14 @@
 package com.example.mzord.services;
 
+import com.example.mzord.models.Function;
+import com.example.mzord.models.Rank;
 import com.example.mzord.models.Seafarer;
 import com.example.mzord.repositories.SeafarerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.time.LocalDate;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -43,5 +43,62 @@ public class SeafarerService implements ISeafarerService {
     @Override
     public List<Seafarer> sortByFunction() {
         return repository.findByOrderBySeafarerFunctionAsc();
+    }
+
+    @Override
+    public Seafarer updateSeafarer(Seafarer newSeafarer) {
+        Optional<Seafarer> oldSeafarer = repository.findById(newSeafarer.getId());
+        oldSeafarer.get().setDisembarkDate(newSeafarer.getDisembarkDate());
+        oldSeafarer.get().setEmbarkDate(newSeafarer.getEmbarkDate());
+        oldSeafarer.get().setIsOnboard(newSeafarer.getIsOnboard());
+        oldSeafarer.get().setNationality(newSeafarer.getNationality());
+        oldSeafarer.get().setSeafarerDob(newSeafarer.getSeafarerDob());
+        oldSeafarer.get().setSeafarerFunction(newSeafarer.getSeafarerFunction());
+        oldSeafarer.get().setSeafarerName(newSeafarer.getSeafarerName());
+        oldSeafarer.get().setSeafarerRank(newSeafarer.getSeafarerRank());
+        oldSeafarer.get().setSeafarerRegister(newSeafarer.getSeafarerRegister());
+
+        repository.save(oldSeafarer.get());
+        return oldSeafarer.get();
+    }
+
+    @Override
+    public Seafarer update(Long id, Map<String, String> requestJson) {
+        Optional<Seafarer> seafarerToUpdate = repository.findById(id);
+        requestJson.forEach((key, value) -> {
+            switch (key) {
+                case "seafarerName":
+                    seafarerToUpdate.get().setSeafarerName(value);
+                    break;
+                case "seafarerDob":
+                    seafarerToUpdate.get().setSeafarerDob(LocalDate.parse(value));
+                    break;
+                case "seafarerRegister":
+                    seafarerToUpdate.get().setSeafarerRegister(value);
+                    break;
+                case "isOnboard":
+                    seafarerToUpdate.get().setIsOnboard(Boolean.parseBoolean(value));
+                    break;
+                case "embarkDate":
+                    seafarerToUpdate.get().setEmbarkDate(LocalDate.parse(value));
+                    break;
+                case "disembarkDate":
+                    seafarerToUpdate.get().setDisembarkDate(LocalDate.parse(value));
+                    break;
+                case "seafarerRank":
+                    seafarerToUpdate.get().setSeafarerRank(Rank.valueOf(value));
+                    break;
+                case "seafarerFunction":
+                    seafarerToUpdate.get().setSeafarerFunction(Function.valueOf(value));
+                    break;
+                case "nationality":
+                    seafarerToUpdate.get().setNationality(value);
+                    break;
+                default:
+                    break;
+            }
+        });
+        repository.save(seafarerToUpdate.get());
+        return seafarerToUpdate.get();
     }
 }

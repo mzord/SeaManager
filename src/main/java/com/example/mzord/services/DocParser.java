@@ -25,9 +25,9 @@ public class DocParser {
     private List<Seafarer> crew = new ArrayList<>();
 
 
-    public DocParser(List<Seafarer> seafarerList, String signDate) throws IOException, OpenXML4JException, XmlException {
+    public DocParser(List<Seafarer> seafarerList) throws IOException, OpenXML4JException, XmlException {
         this.crew = seafarerList;
-        changeSignDate();
+        changeSignDate("Aracaju-SE", "02/12/1992");
     }
 
 
@@ -37,10 +37,12 @@ public class DocParser {
         document.write(out);
     }
 
-    public void changeSignDate() {
+    public void changeSignDate(String local, String date) {
         List<XWPFParagraph> paragraphs = document.getParagraphs();
         XWPFParagraph paragraph = paragraphs.get(16);
-        System.out.println(paragraph.getRuns());
+        List<XWPFRun> runs = paragraph.getRuns();
+        System.out.println(runs);
+        runs.get(0).setText(local + ", " + date, 0);
     }
 
     public void populateCrewListInfo(
