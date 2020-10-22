@@ -27,13 +27,11 @@ public class DocParser {
 
     public DocParser(List<Seafarer> seafarerList) throws IOException, OpenXML4JException, XmlException {
         this.crew = seafarerList;
-        changeSignDate("Aracaju-SE", "02/12/1992");
     }
 
 
     public void write() throws IOException {
         FileOutputStream out = new FileOutputStream("/Users/mzord/Desktop/teste.docx");
-        populateCrewList();
         document.write(out);
     }
 
@@ -69,7 +67,7 @@ public class DocParser {
         lastPortOfCallRuns.get(0).setText(lastPortOfCall, 0);
     }
 
-    public void populateCrewList() {
+    public void populateCrewList(List<Seafarer> crew) {
         // Ignore o count, eu vou mudar isso.
         int count = 1;
         for (Seafarer member : crew) {
