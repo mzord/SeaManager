@@ -19,7 +19,7 @@ public class SeafarerService implements ISeafarerService {
 
     @Override
     public List<Seafarer> findAll() {
-        return repository.findAll();
+        return repository.findByOrderByIdAsc();
     }
 
     @Override

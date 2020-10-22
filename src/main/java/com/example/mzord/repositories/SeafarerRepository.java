@@ -13,5 +13,6 @@ public interface SeafarerRepository extends JpaRepository<Seafarer, Long> {
 
     HashSet<Seafarer> findByIsOnboardTrue();
     List<Seafarer> findByOrderBySeafarerFunctionAsc();
+    List<Seafarer> findByOrderByIdAsc();
 
 }
