@@ -14,7 +14,7 @@ public class CrewList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDate created_on;
+    private LocalDate createdOn;
     private LocalDate signDate;
     private LocalDate departureDate;
 
@@ -22,31 +22,24 @@ public class CrewList {
     private String portOfArrival;
     private String signLocal;
 
-//    private List<Seafarer> seafarers;
-
     public CrewList(){}
 
-    public CrewList(Long id, LocalDate created_on, LocalDate signDate, LocalDate departureDate, String lastPortOfCall, String portOfArrival, String signLocal) {
+    public CrewList(Long id, LocalDate signDate, LocalDate departureDate, String lastPortOfCall, String portOfArrival, String signLocal) {
         this.id = id;
-        this.created_on = created_on;
+        this.createdOn = LocalDate.now();
         this.signDate = signDate;
         this.departureDate = departureDate;
         this.lastPortOfCall = lastPortOfCall;
         this.portOfArrival = portOfArrival;
         this.signLocal = signLocal;
-//        this.seafarers = seafarers;
     }
 
     public Long getId() {
         return id;
     }
 
-    public LocalDate getCreated_on() {
-        return created_on;
-    }
-
-    public void setCreated_on(LocalDate created_on) {
-        this.created_on = created_on;
+    public LocalDate getCreatedOn() {
+        return createdOn;
     }
 
     public LocalDate getSignDate() {
@@ -89,11 +82,4 @@ public class CrewList {
         this.signLocal = signLocal;
     }
 
-//    public List<Seafarer> getSeafarers() {
-////        return seafarers;
-//    }
-
-    public void addSeafarer(Seafarer seafarer) {
-//        this.seafarers.add(seafarer);
-    }
 }

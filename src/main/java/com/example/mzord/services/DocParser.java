@@ -22,11 +22,8 @@ public class DocParser {
 
     XWPFTable infoTable = document.getTableArray(0);
 
-    private List<Seafarer> crew = new ArrayList<>();
-
 
     public DocParser(List<Seafarer> seafarerList) throws IOException, OpenXML4JException, XmlException {
-        this.crew = seafarerList;
     }
 
 

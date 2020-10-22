@@ -65,20 +65,4 @@ public class SeafarerController {
         seafarerService.update(id, requestJson);
     }
 
-    // Show crew onboard
-    @GetMapping("/crew")
-    public List<Seafarer> crew() {
-        return seafarerService.showCrew();
-    }
-
-    @GetMapping("/crewlist")
-    public List<Seafarer> generateCrewList() throws OpenXML4JException, XmlException, IOException {
-        DocParser docParser = new DocParser(seafarerService.sortByFunction());
-        docParser.changeSignDate("Aracaju-SE", "02/12/1992");
-        docParser.populateCrewList(seafarerService.showCrew());
-        docParser.populateCrewListInfo("Aracaju-SE", "22/10/2020", "Aracaju-SE");
-        docParser.write();
-        return seafarerService.showCrew();
-    }
-
 }
