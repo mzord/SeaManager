@@ -1,5 +1,7 @@
 package com.example.mzord.models;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,7 +17,11 @@ public class CrewList {
     private Long id;
 
     private LocalDate createdOn;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate signDate;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate departureDate;
 
     private String lastPortOfCall;

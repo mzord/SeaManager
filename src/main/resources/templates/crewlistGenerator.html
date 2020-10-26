@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Crew List Generator</title>
+</head>
+<body>
+<form th:action="@{/generateCrewList}" th:object="${crewList}" method="POST">
+    <div>
+        <label for="lastPortOfCall">Last Port Of Call</label>
+        <input type="text" th:field="*{lastPortOfCall}" id="lastPortOfCall" placeholder="Last Port Of Call">
+
+        <label for="portOfArrival">Port of Arrival</label>
+        <input type="text" th:field="*{portOfArrival}" id="portOfArrival">
+
+        <label for="departureDate">Departure Date</label>
+        <input type="date" th:field="*{departureDate}" id="departureDate">
+    </div>
+
+    <div>
+        <label for="signLocal">Signature Local</label>
+        <input type="text" id="signLocal" th:field="*{signLocal}">
+
+        <label for="signDate">Signature Date</label>
+        <input type="date" id="signDate" th:field="*{signDate}">
+    </div>
+    <div>
+        <input type="submit" value="Generate Crew List">
+    </div>
+</form>
+</body>
+</html>
