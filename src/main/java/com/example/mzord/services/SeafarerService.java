@@ -101,4 +101,9 @@ public class SeafarerService implements ISeafarerService {
         repository.save(seafarerToUpdate.get());
         return seafarerToUpdate.get();
     }
+
+    @Override
+    public List<Seafarer> showDisembarked() {
+        return repository.findByIsOnboardFalse();
+    }
 }

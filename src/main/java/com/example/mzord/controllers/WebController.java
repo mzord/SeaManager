@@ -1,6 +1,7 @@
 package com.example.mzord.controllers;
 
 import com.example.mzord.models.CrewList;
+import com.example.mzord.models.Rank;
 import com.example.mzord.models.Seafarer;
 import com.example.mzord.services.DocParser;
 import com.example.mzord.services.SeafarerService;
@@ -33,6 +34,28 @@ public class WebController {
         Seafarer seafarer = seafarerService.findById(id).get();
         model.addAttribute("seafarer", seafarer);
         return "seafarer";
+    }
+
+    @GetMapping("/seafarer/new")
+    private String addSeafarer(Seafarer seafarer) {
+        return "addSeafarer";
+    }
+
+    @PostMapping("/addseafarer")
+    private String addSeafarer(@Validated Seafarer seafarer, BindingResult result) {
+        if (result.hasErrors()) {
+            System.out.println(result);
+            return "addSeafarer";
+        }
+        seafarerService.save(seafarer);
+        return "redirect:/index";
+    }
+
+    @GetMapping("seafarers")
+    private String getAllSeafarers(Model model) {
+        model.addAttribute("seafarersOnBoard", seafarerService.showCrew());
+        model.addAttribute("seafarersOffBoard", seafarerService.showDisembarked());
+        return "showSeafarers";
     }
 
     @GetMapping("/crewlist")

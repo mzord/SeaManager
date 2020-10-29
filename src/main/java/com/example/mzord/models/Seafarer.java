@@ -1,6 +1,7 @@
 package com.example.mzord.models;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.hateoas.RepresentationModel;
 
 import javax.persistence.*;
@@ -17,10 +18,18 @@ public class Seafarer extends RepresentationModel<Seafarer> {
 
     private String seafarerName;
     private String seafarerRegister;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate seafarerDob;
+
     private Boolean isOnboard;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate embarkDate;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate disembarkDate;
+
     private String seafarerNationality;
 
     @Enumerated(EnumType.STRING)
@@ -108,15 +117,15 @@ public class Seafarer extends RepresentationModel<Seafarer> {
         return seafarerRank;
     }
 
-    public void setSeafarerRank(Rank seafarer_rank) {
-        this.seafarerRank = seafarer_rank;
+    public void setSeafarerRank(Rank seafarerRank) {
+        this.seafarerRank = seafarerRank;
     }
 
     public Function getSeafarerFunction() {
         return seafarerFunction;
     }
 
-    public void setSeafarerFunction(Function seafarer_function) {
-        this.seafarerFunction = seafarer_function;
+    public void setSeafarerFunction(Function seafarerFunction) {
+        this.seafarerFunction = seafarerFunction;
     }
 }

@@ -11,8 +11,9 @@ import java.util.List;
 @Repository
 public interface SeafarerRepository extends JpaRepository<Seafarer, Long> {
 
-    HashSet<Seafarer> findByIsOnboardTrue();
+    List<Seafarer> findByIsOnboardTrue();
     List<Seafarer> findByOrderBySeafarerFunctionAsc();
     List<Seafarer> findByOrderByIdAsc();
+    List<Seafarer> findByIsOnboardFalse();
 
 }

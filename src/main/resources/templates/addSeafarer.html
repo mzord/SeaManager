@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Add crew member</title>
@@ -24,43 +24,48 @@
 <body>
 
     <div align="center">
-        <div method="post">
+        <form th:action="@{/addseafarer}" th:object="${seafarer}" method="post" >
             <div id="formDiv">
                 <div class="formDiv 1column" id="name">
-                    <label>Name: </label>
-                    <input type="text" placeholder="name" />
+                    <label for="seafarerName">Name: </label>
+                    <input id="seafarerName" th:field="*{seafarerName}" type="text" placeholder="name" />
                 </div>
                 <div class="formDiv 1column" id="register">
-                    <label>CIR number:</label>
-                    <input type="text" placeholder="register number" />
-                </div>
-                <div class="formDiv 1column">
-                    <label>Seafarer Register Number</label>
-                    <input type="text" placeholder="register">
+                    <label for="seafarerRegister">CIR number:</label>
+                    <input id="seafarerRegister" th:field="*{seafarerRegister}" type="text" placeholder="register number" />
                 </div>
                 <div class="formDiv 2column">
-                    <label>Date of Birth</label>
-                    <input type="date" name="seafarerDob">
+                    <label for="seafarerDob">Date of Birth</label>
+                    <input id="seafarerDob" th:field="*{seafarerDob}" type="date" name="seafarerDob">
                 </div>
                 <div class="formDiv 2column">
-                    <label>On board?</label>
-                    <input type="checkbox" name="isOnboard" placeholder="false">
+                    <label for="isOnboard">On board?</label>
+                    <input id="isOnboard" type="checkbox" name="isOnboard" placeholder="false">
                 </div>
                 <div class="formDiv 2column">
-                    <label>Embark Date</label>
-                    <input type="date" name="embarkDate">
+                    <label for="embarkDate">Embark Date</label>
+                    <input id="embarkDate" th:field="*{embarkDate}" type="date" name="embarkDate">
                 </div>
                 <div class="formDiv 2column">
-                    <label>Disembark Date</label>
-                    <input type="date" name="embarkDate">
+                    <label for="disembarkDate">Disembark Date</label>
+                    <input id="disembarkDate" th:field="*{disembarkDate}" type="date" name="embarkDate">
                 </div>
                 <div class="formDiv 3column">
-                    <label>Rank</label>
-                    <input type="text" name="seafarerRank">
+                    <label for="seafarerRank">Rank</label>
+                    <select th:field="*{seafarerRank}" id="seafarerRank" name="Rank">
+                        <option th:each="rankOpt : ${T(com.example.mzord.models.Rank).values()}"
+                        th:value="${rankOpt}" th:text="${rankOpt.displayValue}"></option>
+                    </select>
                 </div>
                 <div class="formDiv 3column">
-                    <label>Function</label>
-                    <input type="text" name="seafarerFunction"/>
+                    <label for="seafarerFunction">Function:</label>
+                    <select th:field="*{seafarerFunction}" id="seafarerFunction" name="Function">
+                        <option th:each="funcOpt : ${T(com.example.mzord.models.Function).values()}"
+                                th:value="${funcOpt}" th:text="${funcOpt.displayValue}"></option>
+                    </select>
+                </div>
+                <div>
+                    <input type="submit" value="Add">
                 </div>
     <!--            {-->
     <!--            "seafarer_dob": "1992-12-02",-->

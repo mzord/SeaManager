@@ -6,7 +6,7 @@
 </head>
 <body>
 
-    <h2>List of seafarers on this boat</h2>
+    <h2>On board</h2>
 
     <table>
         <tr>
@@ -14,12 +14,25 @@
             <th>Name</th>
             <th>Seaman`s book number</th>
         </tr>
-        <tr th:each="seafarer : ${seafarers}">
+        <tr th:each="seafarer : ${seafarersOnBoard}">
             <td th:text="${seafarer.id}">Id</td>
-            <td th:text="${seafarer.name}">Name</td>
-            <td th:text="${seafarer.register}">Seaman`s book number</td>
+            <td th:text="${seafarer.seafarerName}">Name</td>
+            <td th:text="${seafarer.seafarerRegister}">Seaman`s book number</td>
         </tr>
     </table>
 
+    <h2>Off board</h2>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Seaman`s book number</th>
+        </tr>
+        <tr th:each="seafarer : ${seafarersOffBoard}">
+            <td th:text="${seafarer.id}">Id</td>
+            <td th:text="${seafarer.seafarerName}">Name</td>
+            <td th:text="${seafarer.seafarerRegister}">Seaman`s book number</td>
+        </tr>
+    </table>
 </body>
 </html>

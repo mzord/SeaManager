@@ -14,4 +14,5 @@ public interface ISeafarerService {
     public Seafarer update(Long id, Map<String, String> requestJson);
     public List<Seafarer> showCrew();
     public List<Seafarer> sortByFunction();
+    public List<Seafarer> showDisembarked();
 }
