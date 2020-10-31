@@ -32,10 +32,10 @@ public class Seafarer extends RepresentationModel<Seafarer> {
 
     private String seafarerNationality;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private Rank seafarerRank;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private Function seafarerFunction;
 
     public Seafarer() {}

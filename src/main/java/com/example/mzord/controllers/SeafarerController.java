@@ -1,6 +1,7 @@
 package com.example.mzord.controllers;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
+
 import com.example.mzord.models.Seafarer;
 import com.example.mzord.services.DocParser;
 import com.example.mzord.services.ISeafarerService;
@@ -31,6 +32,11 @@ public class SeafarerController {
                     .withRel("Certificates:"));
         }
         return seafarers;
+    }
+
+    @GetMapping("/byfunc")
+    public List<Seafarer> showOrderedByFunction() {
+        return seafarerService.sortByFunction();
     }
 
     // Show specific seafarer using PathVariable 'id'
